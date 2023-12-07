@@ -1,6 +1,8 @@
 import cv2 # Importer OpenCV-biblioteket
 import os # Importer os-biblioteket for at arbejde med stioperationer
 
+precision = 60 #Hvår sikker skal programmet være at den er rigtig i %
+
 #thres = 0.45 # Threshold to detect object
 
 
@@ -37,7 +39,7 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
             print(con)
             
             #Hvis tillidsværdien er over 60%, udfør handlinger
-            if con>60:
+            if con>precision:
                 if className in objects:
                     objectInfo.append([box,className])
 
