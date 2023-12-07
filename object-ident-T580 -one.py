@@ -13,10 +13,11 @@ weightsPath = "C:\\Users\\n\\Documents\\Dania\\Gruppe_5\\Projekt\\GreetBot-main\
 
 #Opret et objekt af typen cv2.dnn_DetectionModel med de angivne vægt- og konfigurationsfiler
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
-net.setInputSize(320,320)
-net.setInputScale(1.0/ 127.5)
-net.setInputMean((127.5, 127.5, 127.5))
-net.setInputSwapRB(True)
+net.setInputSize(320,320) # Sæt inputstørrelsen for billedet, som modellen forventer
+net.setInputScale(1.0/ 127.5)# Skalér inputbillederne ved at dividere pixelværdierne med denne faktor
+net.setInputMean((127.5, 127.5, 127.5))# Specificer gennemsnitsværdier for RGB-kanalerne for billederne
+net.setInputSwapRB(True)# Byt om på R og B kanaler i billederne
+
 
 #Funktion til at få information om genkendte objekter i et billede
 def getObjects(img, thres, nms, draw=True, objects=[]):
@@ -42,10 +43,10 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
 
                     #Hvis draw er sandt, tegn rektangel og tekst på billedet
                     if (draw):
-                        cv2.rectangle(img,box,color=(0,255,0),thickness=2)
-                        cv2.putText(img,className.upper(),(box[0]+10,box[1]+30),
+                        cv2.rectangle(img,box,color=(0,255,0),thickness=2) # Tegn et rektangel omkring det genkendte objekt
+                        cv2.putText(img,className.upper(),(box[0]+10,box[1]+30),# Indsæt tekst med det genkendte klassenavn
                         cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
-                        cv2.putText(img,str(con),(box[0]+200,box[1]+30),
+                        cv2.putText(img,str(con),(box[0]+200,box[1]+30),# Indsæt tekst med tillidsværdien
                         cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
 
     return img,objectInfo
@@ -53,9 +54,9 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
 # Hovede programmet starter her. 
 if __name__ == "__main__":
     #Åbn webcam
-    cap = cv2.VideoCapture(0)
-    cap.set(3,640)
-    cap.set(4,480)
+    cap = cv2.VideoCapture(0)# Opret et VideoCapture-objekt og forbind det til den første videoenhed
+    cap.set(3,640)# Sæt bredden på billedet, der indfanges af kameraet, til 640 pixels
+    cap.set(4,480)# Sæt højden på billedet, der indfanges af kameraet, til 480 pixels
     #cap.set(10,70)
 
 
