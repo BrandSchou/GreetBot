@@ -46,7 +46,7 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
                         cv2.rectangle(img,box,color=(0,255,0),thickness=2) # Tegn et rektangel omkring det genkendte objekt
                         cv2.putText(img,className.upper(),(box[0]+10,box[1]+30),# Indsæt tekst med det genkendte klassenavn
                         cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
-                        cv2.putText(img,str(con),(box[0]+200,box[1]+30),# Indsæt tekst med tillidsværdien
+                        cv2.putText(img,str(con)+"%",(box[0]+200,box[1]+30),# Indsæt tekst med tillidsværdien
                         cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
 
     return img,objectInfo
