@@ -10,8 +10,8 @@ className = "person" # Klassenavn for objektet, der skal genkendes
 print(className)
 
 #Stier til konfigurations- og vægtfiler for det trænede objektdetekteringsmodel
-configPath = "C:\\Users\\n\\Documents\\Dania\\Gruppe_5\\Projekt\\GreetBot-main\\GreetBot-main\\PY-CAM\\ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"#os.path.join("PY-CAM","ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt") #"/home/mathiasschou/Desktop/PY-CAM/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
-weightsPath = "C:\\Users\\n\\Documents\\Dania\\Gruppe_5\\Projekt\\GreetBot-main\\GreetBot-main\\PY-CAM\\frozen_inference_graph.pb"#os.path.join("PY-CAM","frozen_inference_graph.pb") #"/home/mathiasschou/Desktop/PY-CAM/frozen_inference_graph.pb"
+configPath = "PY-CAM\\ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"#os.path.join("PY-CAM","ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt") #"/home/mathiasschou/Desktop/PY-CAM/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
+weightsPath = "PY-CAM\\frozen_inference_graph.pb"#os.path.join("PY-CAM","frozen_inference_graph.pb") #"/home/mathiasschou/Desktop/PY-CAM/frozen_inference_graph.pb"
 
 #Opret et objekt af typen cv2.dnn_DetectionModel med de angivne vægt- og konfigurationsfiler
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
