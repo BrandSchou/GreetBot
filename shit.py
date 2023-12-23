@@ -143,9 +143,6 @@ greet.grid(row=10, column=10)
 
 tk.Label(root, text='Time logging').pack(side=tk.TOP, padx=100, pady=100)
 
-entry = tk.Entry(root, width=25)
-entry.pack(side=tk.TOP, padx=25, pady=25)
-
 tk.Button(root, text='CLOSE', command=root.destroy).pack(side= tk.RIGHT)
 
 main(greet)
