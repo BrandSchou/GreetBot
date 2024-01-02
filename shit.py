@@ -5,6 +5,9 @@ import threading
 import time
 
 
+bkgr = '#009000' #set color(background)
+
+
 ## Used for fun:
 from pygame import mixer
 import random
@@ -116,6 +119,7 @@ time1 = ''
 root = tk.Tk()
 root.title("Greeting window")
 root.attributes("-fullscreen", True)
+root.tk_setPalette(bkgr) #sets all colors to bkgr color
 
 # add frame in main window (root)
 
@@ -133,7 +137,7 @@ canvas.create_image(0,0,anchor=tk.NW,image=img)
 canvas.grid(row=50,column=50,pady=20,padx=100)
 
 # put widgets in frame (txt)
-greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W)
+greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W,foreground='black')
 greet.grid(row=10, column=10)
 
 # put widges in frame (logo)
@@ -143,7 +147,7 @@ greet.grid(row=10, column=10)
 
 tk.Label(root, text='Time logging').pack(side=tk.TOP, padx=100, pady=100)
 
-tk.Button(root, text='CLOSE', command=root.destroy).pack(side= tk.RIGHT)
+tk.Button(root, text='CLOSE',foreground='black', command=root.destroy).pack(side= tk.RIGHT)
 
 main(greet)
 
