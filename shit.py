@@ -6,7 +6,7 @@ import time
 
 
 bkgr = '#009000' #set color(background)
-
+txtc = 'black' #set txt color
 
 ## Used for fun:
 from pygame import mixer
@@ -87,8 +87,8 @@ def main(greet):
         # Kald funktionen for at få information om genkendte objekter i billedet
         result, objectInfo, checksum = getObjects(img,0.45,0.2)
         if checksum == True:
-            tim+=1
-            if tim>80:
+            tim+=1#using tim in order to not have new messeges constanly
+            if tim>80:#increase number if new messege is comming to fast(remember adjusting else tim addition if altert)
                 tim=0
                 random_selection = random.randint(0, len(mp3_files) - 1)
                 if random_selection == previousText:
@@ -100,21 +100,15 @@ def main(greet):
                 root.update()
         else:
             greet.config(text = "")
-            tim+=10
+            tim+=10#bigger number if it takes to long to greet new person after contact was brocken
 
         #Vis billedet i et vindue
         cv2.imshow("Output", img)
-
-        #Vent på et tastetryk i 1 millisekund
-        cv2.waitKey(1)
-
 
         root.update()
         checksum = False
 
 # --- main window ---
-
-time1 = ''
 
 root = tk.Tk()
 root.title("Greeting window")
@@ -137,20 +131,14 @@ canvas.create_image(0,0,anchor=tk.NW,image=img)
 canvas.grid(row=50,column=50,pady=20,padx=100)
 
 # put widgets in frame (txt)
-greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W,foreground='black')
+greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W,foreground=txtc)
 greet.grid(row=10, column=10)
 
-# put widges in frame (logo)
-
-
 # put widget directly in main widnow (root)
-
-tk.Label(root, text='Time logging').pack(side=tk.TOP, padx=100, pady=100)
-
-tk.Button(root, text='CLOSE',foreground='black', command=root.destroy).pack(side= tk.RIGHT)
+tk.Button(root, text='CLOSE',foreground=txtc, command=root.destroy).pack(side= tk.RIGHT)
 
 main(greet)
 
 # --- start ---
 
-root.mainloop()
+root.mainloop() #needed for tkinter to work and evrything after doas not work
