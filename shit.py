@@ -90,16 +90,16 @@ def main(greet):
             tim+=1#using tim in order to not have new messeges constanly
             if tim>80:#increase number if new messege is comming to fast(remember adjusting else tim addition if altert)
                 tim=0
-                random_selection = random.randint(0, len(mp3_files) - 1)
+                random_selection = random.randint(0, len(mp3_files) - 1) # Kigger på listen 'mp3_files' og vælger en random fil fra listen.
                 if random_selection == previousText:
                     random_selection = random.randint(0,len(mp3_files) - 1)
-                mixer.music.load(os.path.join("assets", mp3_files[random_selection]))
+                mixer.music.load(os.path.join("assets", mp3_files[random_selection])) # Her bruges pygame til at tage den random fil fra før og afspiller lyden.
                 mixer.music.play()
                 previousText = random_selection
-                greet.config(text = associateText[random_selection])
+                greet.config(text = associateText[random_selection]) # Her konfigureres teksten som matcher lyd filen til at blive vist på skærmen.
                 root.update()
         else:
-            greet.config(text = "")
+            greet.config(text = "") # Her sættes teksten tilbage til ingenting hvis checksum'en ikke er '= True'
             tim+=10#bigger number if it takes to long to greet new person after contact was brocken
 
         #Vis billedet i et vindue
