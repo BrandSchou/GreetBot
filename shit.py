@@ -1,13 +1,14 @@
 import cv2 # Importer OpenCV-biblioteket
 import os # Importer os-biblioteket for at arbejde med stioperationer
 import tkinter as tk
+import threading
+import time
 
 
 bkgr = '#009000' #set color(background)
 txtc = 'black' #set txt color
 
-
-## Brugt til lyd:
+## Used for fun:
 from pygame import mixer
 import random
 ## -------------
@@ -108,36 +109,36 @@ def main(greet):
         checksum = False
 
 # --- main window ---
-
 root = tk.Tk()
 root.title("Greeting window")
 root.attributes("-fullscreen", True)
-root.tk_setPalette(bkgr) #sets all colors to bkgr color
+root.tk_setPalette("blue") #sets all colors to bkgr color
+
 
 # add frame in main window (root)
-
 logo = tk.Frame(root)
-logo.pack()
 txt = tk.Frame(root)
+logo.pack()
 txt.pack()
 
-# build canvas
 
-canvas=tk.Canvas(logo,width=800,height=242)
-canvas.pack()
+# build canvas
+canvas=tk.Canvas(logo,width=800,height=242) # Canvas knyttes til 'logo' frame
 img = tk.PhotoImage(file=(os.path.join("assets","Seluxit_logo_updated_color_800px.png")))
-canvas.create_image(0,0,anchor=tk.NW,image=img)
-canvas.grid(row=50,column=50,pady=20,padx=100)
+canvas.create_image(0, 0, anchor=tk.NW, image=img) # X-StartPos, Y-StartPos, Anchor = NorthWest, image = (skal være PhotoImage)
+canvas.pack(side = tk.TOP, pady = "20") # Canvas pakkes ind i 'logo' frame (Sat i midten med tk.TOP)
+
 
 # put widgets in frame (txt)
-greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W,foreground=txtc)
-greet.grid(row=10, column=10)
+greet = tk.Label(txt, text = "", font = ('times', 20), bd = 1, anchor = tk.W, foreground = "black")
+greet.pack(side = tk.TOP, pady = "30") # greet label pakkes ind i 'txt' frame (Sat i midten med tk.TOP)
+
 
 # put widget directly in main widnow (root)
-tk.Button(root, text='CLOSE',foreground=txtc, command=root.destroy).pack(side= tk.RIGHT)
+CloseButton = tk.Button(root, text = 'CLOSE', foreground = "black", command = root.destroy)
+CloseButton.pack(side = tk.BOTTOM,anchor = tk.SE, padx = "20", pady = "20") # CloseButton pakkes ind i 'root' og bliver sat i nederste højre hjørne
 
 main(greet)
 
 # --- start ---
-
 root.mainloop() #needed for tkinter to work and evrything after doas not work
