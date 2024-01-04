@@ -1,8 +1,6 @@
 import cv2 # Importer OpenCV-biblioteket
 import os # Importer os-biblioteket for at arbejde med stioperationer
-import tkinter as tk
-import threading
-import time
+import tkinter as tk # Importer tkinter til arbejde med GUI
 
 
 bkgr = '#009000' #set color(background)
@@ -43,7 +41,7 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
     classIds, confs, bbox = net.detect(img,confThreshold=thres,nmsThreshold=nms)
 
     #Hvis listen objects er tom, brug className
-    if len(objects) == 0: 
+    if len(objects) == 0:
         objects = className
     objectInfo =[]
 
@@ -87,8 +85,8 @@ def main(greet):
         # Kald funktionen for at få information om genkendte objekter i billedet
         result, objectInfo, checksum = getObjects(img,0.45,0.2)
         if checksum == True:
-            tim+=1#using tim in order to not have new messeges constanly
-            if tim>80:#increase number if new messege is comming to fast(remember adjusting else tim addition if altert)
+            tim+=1
+            if tim>80:
                 tim=0
                 random_selection = random.randint(0, len(mp3_files) - 1) # Kigger på listen 'mp3_files' og vælger en random fil fra listen.
                 if random_selection == previousText:
@@ -100,45 +98,49 @@ def main(greet):
                 root.update()
         else:
             greet.config(text = "") # Her sættes teksten tilbage til ingenting hvis checksum'en ikke er '= True'
-            tim+=10#bigger number if it takes to long to greet new person after contact was brocken
+            tim+=10
 
         #Vis billedet i et vindue
         cv2.imshow("Output", img)
+
+        #Vent på et tastetryk i 1 millisekund
+        cv2.waitKey(1)
+
 
         root.update()
         checksum = False
 
 # --- main window ---
-
 root = tk.Tk()
 root.title("Greeting window")
 root.attributes("-fullscreen", True)
-root.tk_setPalette(bkgr) #sets all colors to bkgr color
+root.tk_setPalette("blue") #sets all colors to bkgr color
+
 
 # add frame in main window (root)
-
 logo = tk.Frame(root)
-logo.pack()
 txt = tk.Frame(root)
+logo.pack()
 txt.pack()
 
-# build canvas
 
-canvas=tk.Canvas(logo,width=800,height=242)
-canvas.pack()
+# build canvas
+canvas=tk.Canvas(logo,width=800,height=242) # Canvas knyttes til 'logo' frame
 img = tk.PhotoImage(file=(os.path.join("assets","Seluxit_logo_updated_color_800px.png")))
-canvas.create_image(0,0,anchor=tk.NW,image=img)
-canvas.grid(row=50,column=50,pady=20,padx=100)
+canvas.create_image(0, 0, anchor=tk.NW, image=img) # X-StartPos, Y-StartPos, Anchor = NorthWest, image = (skal være PhotoImage)
+canvas.pack(side = tk.TOP, pady = "20") # Canvas pakkes ind i 'logo' frame (Sat i midten med tk.TOP)
+
 
 # put widgets in frame (txt)
-greet = tk.Label(txt,text="",font=('times', 20), bd=1, anchor=tk.W,foreground=txtc)
-greet.grid(row=10, column=10)
+greet = tk.Label(txt, text = "", font = ('times', 20), bd = 1, anchor = tk.W, foreground = "black")
+greet.pack(side = tk.TOP, pady = "30") # greet label pakkes ind i 'txt' frame (Sat i midten med tk.TOP)
+
 
 # put widget directly in main widnow (root)
-tk.Button(root, text='CLOSE',foreground=txtc, command=root.destroy).pack(side= tk.RIGHT)
+CloseButton = tk.Button(root, text = 'CLOSE', foreground = "black", command = root.destroy)
+CloseButton.pack(side = tk.BOTTOM,anchor = tk.SE, padx = "20", pady = "20") # CloseButton pakkes ind i 'root' og bliver sat i nederste højre hjørne
 
 main(greet)
 
 # --- start ---
-
 root.mainloop() #needed for tkinter to work and evrything after doas not work
