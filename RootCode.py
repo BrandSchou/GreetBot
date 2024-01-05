@@ -7,9 +7,9 @@ from pygame import mixer
 import random
 ## -------------
 
-
-bkgr = '#009000' #set color(background)
-txtc = 'black' #set txt color
+#set color by keyword or hex #
+bkgr = 'cyan' #background color
+txtc = 'black' #txt color
 
 
 mp3_files = ["UhOh.mp3", "StopShooting.mp3", "WhoAreYou.mp3", "haihaihai.mp3", "yayaya-hai.mp3"]
@@ -24,8 +24,8 @@ className = "person" # Klassenavn for objektet, der skal genkendes
 print(className)
 
 # Stier til konfigurations- og vægtfiler for det trænede objektdetekteringsmodel
-configPath = "PY-CAM\\ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"#os.path.join("PY-CAM","ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt") #"/home/mathiasschou/Desktop/PY-CAM/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
-weightsPath = "PY-CAM\\frozen_inference_graph.pb"#os.path.join("PY-CAM","frozen_inference_graph.pb") #"/home/mathiasschou/Desktop/PY-CAM/frozen_inference_graph.pb"
+configPath = os.path.join("PY-CAM","ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt")
+weightsPath = os.path.join("PY-CAM","frozen_inference_graph.pb")
 
 # Opret et objekt af typen cv2.dnn_DetectionModel med de angivne vægt- og konfigurationsfiler
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
@@ -110,7 +110,7 @@ def main(greet):
 root = tk.Tk()
 root.title("Greeting window")
 root.attributes("-fullscreen", True)
-root.tk_setPalette("cyan") # Set color to a default string or to definable variable bkgr
+root.tk_setPalette(bkgr) # Set color to a default string or to definable variable bkgr
 
 
 # add frame in main window (root)
@@ -128,12 +128,12 @@ canvas.pack(side = tk.TOP, pady = "20") # Canvas pakkes ind i 'logo' frame (Sat 
 
 
 # put widgets in frame (txt)
-greet = tk.Label(txt, text = "", font = ('times', 20), bd = 1, anchor = tk.W, foreground = "black")
+greet = tk.Label(txt, text = "", font = ('times', 20), bd = 1, anchor = tk.W, foreground =txtc)
 greet.pack(side = tk.TOP, pady = "30") # greet label pakkes ind i 'txt' frame (Sat i midten med tk.TOP)
 
 
 # put widget directly in main widnow (root)
-CloseButton = tk.Button(root, text = 'CLOSE', foreground = "black", command = root.destroy)
+CloseButton = tk.Button(root, text = 'CLOSE', foreground =txtc, command = root.destroy)
 CloseButton.pack(side = tk.BOTTOM,anchor = tk.SE, padx = "20", pady = "20") # CloseButton pakkes ind i 'root' og bliver sat i nederste højre hjørne
 
 main(greet)
